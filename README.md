@@ -73,16 +73,16 @@ To be able to create relevant queries that would allow for an end user to gain m
 ## **All Queries**
   
 ```sql
---Count and percent of total students by major
+--Count and Percent of Total Students by Major
 SELECT Major,
-       Count(StudentID) AS Cnt_Students,
+       Count(StudentID) AS Count_Students,
        Round(Cast(Count(*) * 100.0 / (SELECT Count(*) FROM Students) AS FLOAT), 2) AS Percent_of_Total_Students
 FROM Students
 GROUP BY Major
 ORDER BY Percent_of_Total_Students DESC;
 ```
 ```sql
---General averages per major
+--General Averages per Major
 SELECT Major,
        Avg(Age) AS Avg_Age,
        Round(Avg(Gpa), 2) AS Avg_Gpa,
@@ -94,7 +94,7 @@ GROUP BY Major
 ORDER BY Avg_Gpa DESC;
 ```
 ```sql
---Students who have a higher GPA than the overall average
+--Students Who Have a Higher GPA Than the Overall Average
 SELECT s.StudentID,
        Gender,
        Age,
@@ -106,7 +106,7 @@ WHERE GPA > (SELECT Avg(GPA) FROM Academic_Performance)
 ORDER BY GPA DESC;
 ```
 ```sql
---Which students are performing well or could use some improvement (Is GPA greater than 3.0?)
+--Which Students Are Performing Well or Could Use Some Improvement (Is GPA greater than 3.0?)
 SELECT s.StudentID,
        Major,
        Round(GPA, 2) AS GPA,
@@ -116,71 +116,89 @@ FROM   Students s
 JOIN Academic_Performance ap ON s.StudentID = ap.StudentId;
 ```
 ```sql
---Financial aid percentages by gender 
-SELECT Gender,
-       Count(Studentid) AS Total_Students,
-       Sum(CASE WHEN FinAid = 'Yes' THEN 1 ELSE 0 END) AS Students_With_FinAid,
-       Round(Cast(Sum(CASE WHEN FinAid = 'Yes' THEN 1 ELSE 0 END) * 100.0 / Count(*) AS FLOAT), 2) AS Percent_With_FinAid
-FROM Students
-GROUP BY Gender
+--Attendance Rate and GPA by Gender and Financial Aid
+SELECT 
+	s.Major,
+    s.Gender,
+	s.FinAid,
+    Count(s.StudentID) AS Total_Students,
+    Sum(CASE WHEN s.FinAid = 'Yes' THEN 1 ELSE 0 END) AS Students_With_FinAid,
+    Round(Cast(Sum(CASE WHEN s.FinAid = 'Yes' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) AS FLOAT), 2) AS Percent_With_FinAid,
+	Round(Avg(ap.GPA), 2) AS Avg_GPA,
+    Round(Avg(ap.AttendanceRate), 2) / 100 AS Avg_Attendance_Rate
+FROM Students s
+JOIN Academic_Performance ap ON s.StudentID = ap.StudentId
+GROUP BY s.Gender, s.Major, s.FinAid
+ORDER BY s.Major;
 ```
 ```sql
---Part-time job vs attendance rate and gpa
-SELECT PartTimeJob,
-       Round(Avg(GPA), 2) AS Avg_GPA,
-       Round(Avg(AttendanceRate), 2) / 100 AS Avg_Attendance_Rate
+--Part-Time Job vs Attendance Rate and GPA
+SELECT s.PartTimeJob,
+	   Count(s.StudentID) as Count_Students,
+       s.Major,
+       Round(Avg(ap.GPA), 2) AS Avg_GPA,
+       Round(Avg(ap.AttendanceRate), 2) / 100 AS Avg_Attendance_Rate
 FROM Academic_Performance ap
 JOIN Students s ON ap.StudentID = s.StudentID
-GROUP BY PartTimeJob
-ORDER BY Avg_GPA DESC
+GROUP BY s.PartTimeJob, s.Major
+ORDER BY Major;
 ```
 ```sql
---Extra curricular activities vs attendance rate and gpa
-SELECT ExtraCurricularActivities,
-       Round(Avg(GPA), 2) AS Avg_GPA,
-       Round(Avg(AttendanceRate), 2) / 100 AS Avg_Attendance_Rate
-FROM  Academic_Performance ap
+--Extra Curricular Activities vs Attendance Rate and GPA
+SELECT s.ExtraCurricularActivities,
+	   Count(s.StudentID) as Count_Students,
+       s.Major,
+       Round(Avg(ap.GPA), 2) AS Avg_GPA,
+       Round(Avg(ap.AttendanceRate), 2) / 100 AS Avg_Attendance_Rate
+FROM Academic_Performance ap
 JOIN Students s ON ap.StudentID = s.StudentID
-GROUP BY ExtraCurricularActivities
-ORDER BY Avg_GPA DESC
+GROUP BY s.ExtraCurricularActivities, s.Major
+ORDER BY Major;
 ```
 ```sql
---Different housing situations vs attendance rate and gpa
-SELECT Housing,
-       Round(Avg(GPA), 2) AS Avg_GPA,
-       Round(Avg(AttendanceRate), 2) / 100 AS Avg_Attendance_Rate
-FROM  Academic_Performance ap
+--Different Housing Situations vs Attendance Rate and GPA
+SELECT s.Housing,
+	   Count(s.StudentID) as Count_Students,
+	   s.Major,
+       Round(Avg(ap.GPA), 2) AS Avg_GPA,
+       Round(Avg(ap.AttendanceRate), 2) / 100 AS Avg_Attendance_Rate 
+FROM Academic_Performance ap
 JOIN Students s ON ap.StudentID = s.StudentID
-GROUP BY Housing
-ORDER BY Avg_GPA DESC
+GROUP BY s.Housing, s.Major
+ORDER BY Major;
 ```
 ```sql
---Average attendance rate and number of study hours per week for students with different GPAs
+--Average Attendance Rate and Number of Study Hours per Week for Students With Different GPA's
 WITH GPA_Range AS (
-	SELECT StudentID,
-           StudyHoursPerWeek,
-		   AttendanceRate,
+    SELECT ap.StudentID,
+           ap.StudyHoursPerWeek,
+           ap.AttendanceRate,
+           s.Major,
            CASE
-              WHEN GPA < 1 THEN '< 1.0'
-              WHEN GPA >= 1 AND GPA < 1.5 THEN '1.0 - 1.4'
-              WHEN GPA >= 1.5 AND GPA < 2 THEN '1.5 - 1.9'
-              WHEN gpa >= 2 AND GPA < 2.5 THEN '2.0 - 2.4'
-              WHEN GPA >= 2.5 AND GPA < 3 THEN '2.5 - 2.9'
-              WHEN GPA >= 3 AND GPA < 3.5 THEN '3.0 - 3.4'
-              WHEN GPA >= 3.5 AND GPA < 4 THEN '3.5 - 3.9'
-              ELSE '4.0'
-          END AS GPA_Rating
-	FROM Academic_Performance)
+               WHEN ap.GPA < 1 THEN '< 1.0'
+               WHEN ap.GPA >= 1 AND ap.GPA < 1.5 THEN '1.0 - 1.4'
+               WHEN ap.GPA >= 1.5 AND ap.GPA < 2 THEN '1.5 - 1.9'
+               WHEN ap.GPA >= 2 AND ap.GPA < 2.5 THEN '2.0 - 2.4'
+               WHEN ap.GPA >= 2.5 AND ap.GPA < 3 THEN '2.5 - 2.9'
+               WHEN ap.GPA >= 3 AND ap.GPA < 3.5 THEN '3.0 - 3.4'
+               WHEN ap.GPA >= 3.5 AND ap.GPA < 4 THEN '3.5 - 3.9'
+               ELSE '4.0'
+           END AS GPA_Rating
+       FROM Academic_Performance ap
+       JOIN Students s ON ap.StudentID = s.StudentID
+)
 
-SELECT GPA_Rating,
-       Count(StudentID) AS cnt_Students,
-       Round(Avg(AttendanceRate), 2) / 100 Avg_AttandanceRate,
-       Avg(StudyHoursPerWeek)AS Avg_StudyHoursPerWeek
+SELECT Major,
+	   GPA_Rating,
+	   COUNT(StudentID) AS Count_Students,
+	   ROUND(AVG(AttendanceRate), 2) / 100 AS Avg_AttendanceRate,
+	   AVG(StudyHoursPerWeek) AS Avg_StudyHoursPerWeek
 FROM GPA_Range
-GROUP BY GPA_Rating;
+GROUP BY Major, GPA_Rating
+ORDER BY Major, GPA_Rating;
 ```
 ```sql
---GPA's of the top 10 students per major
+--GPA's of the Top 10 Students per Major
 WITH RankedStudentsTop AS (
 	SELECT s.StudentID,
            Major,
@@ -197,7 +215,7 @@ FROM RankedStudentstop
 WHERE TopRank <= 10;
 ```
 ```sql
---GPA's of the bottom 10 students per major
+--GPA's of the Bottom 10 Students per Major
 WITH RankedStudentsBottom AS (
 	SELECT s.StudentID,
            Major,
