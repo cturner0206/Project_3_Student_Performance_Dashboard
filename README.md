@@ -44,18 +44,19 @@ Loading the data into Microsoft SQL Server Management Studio involved the follow
 
 To be able to create relevant queries that would allow for an end user to gain meaningful insights, I first had a brainstorming session to: 
 
-1. Identifying Relevant Data Points:
-  -  FINISH THIS
-  -   FINISH THIS
-  -    FINISH THIS
-  -     FINISH THIS
-  -  FINISH THIS
-  -   FINISH THIS
-  -    FINISH THIS
-  -     FINISH THIS
-  -  FINISH THIS
+1. Identifying Relevant Data Points that can affect GPA:
+- Attendance rate: How does housing location, extracurricular activity participation, and having a part-time job outside of school affect attendance rates and GPA?
+- Major: Does the difficulty of a major affect overall GPA or attendance rates? Ex: Engineering vs Arts.
+- Effort: Total study hours per week and attendance rate affect on GPA. 
+- Assistance: Does receiving financial aid affect GPA or attendance?
+- Demographics: Age and Gender affects on GPA.
+- Distribution: How many students are in each GPA range, who is performing well, top 10 and bottom 10 students by major.
+  
+2. Deciding on visuals
+- I believe that simple matrices, cards, bar charts, and tables would be the most effective visuals for this dashboard as they are easy to read while conveying all the data appropriately. 
+- Slicers by major and by student performance will allow for further filtering and analysis.
+- Wont be any time series analysis or visuals as there wasn't any time data provied in the dataset. 
 
-  - 
 ## **Data Cleaning:**  
   Any data cleaning that took place was in the queries themselves as the data itself was completely clean. The only altering I did was rounding and casting values.
 
@@ -238,17 +239,19 @@ WHERE BottomRank <= 10;
 ### Steps in Creating the Report:
 
 ### 1. **Import SQL Queries:**  
-   Imported the SQL queries into Power BI to create the fact and dimension tables.
+Imported all of the SQL queries into Power BI to create the fact and dimension tables.
 
 ### 2. **Connect Tables in Model View:**  
-   Established connections between different tables in the model view, using a STAR schema design.
+Established relationships between the different tables in the model view. Used a STAR schema design.
 <p align="center">   
-<img src="" alt="model" width="600" />
+<img src="https://github.com/user-attachments/assets/21b9c917-ae76-45b7-a740-93323e65f981" alt="model" width="600" />
 </p> 
 
-### 3. **Built the different visuals** 
+### 3. **Building the different visuals** 
+
 
 ### 4. **Added more pages** 
+
 
 
 
