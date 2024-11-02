@@ -1,6 +1,7 @@
 # Project 3: Student Performance Dashboard 
    
-<img src="" alt="dash" width="900" />
+<img src="https://github.com/user-attachments/assets/5a705fcf-1411-49a3-a444-2afb2e629e95" alt="dash" width="900" />
+
 
 # Table of Contents 
 - [Project Overview](#project-overview)
@@ -14,7 +15,7 @@
 
 # Project Overview
 
-The primary goal of this project is to identify and analyze the various factors that affect student GPA. To do this, I used SQL queries to calculate averages, distributions, and other relevant data and imported the queries into PowerBI to create an interactive dashboard. The dashboard aims to provide insights that can help educators and administrators make informed decisions to enhance student performance.
+The primary goal of this project was to identify and analyze the various factors that affect student GPA. To do this, I used SQL queries to calculate averages, distributions, and other relevant data and imported the queries into PowerBI to create an interactive dashboard. The dashboard aims to provide insights that can help educators and administrators make informed decisions to enhance student performance.
 
 # Data Source
 The data used for this project comes from the `student_performance_data.csv` and `student_performance_data1.csv` files. The original dataset file had both files combined, but I split it up to segment the data based on student data and academic performance metrics. 
@@ -25,7 +26,7 @@ The data used for this project comes from the `student_performance_data.csv` and
 Loading the data into Microsoft SQL Server Management Studio involved the following steps:
 
 - Created new Student_Data database.
-- Imported `student_performance_data.csv` and `student_performance_data1.csv` files in SQL Server Management Studio.
+- Imported `student_performance_data.csv` and `student_performance_data1.csv` files in SQL Server Management Studio as two seperate tables.
 - Chose relevent data types for the different columns in both tables
    - StudentID was used as the PK in Students table and PK/FK in Academic_Performance table to maintain data integrity
    - Set everything to not include nulls
@@ -238,21 +239,28 @@ WHERE BottomRank <= 10;
 
 ### Steps in Creating the Report:
 
-### 1. **Import SQL Queries:**  
-Imported all of the SQL queries into Power BI to create the fact and dimension tables.
+### 1. **Importing the Data:**  
+Imported all of the different SQL queries and both of the CSV files into Power BI. 
 
 ### 2. **Connect Tables in Model View:**  
-Established relationships between the different tables in the model view. Used a STAR schema design.
+The fact tables in the report consisted of the two different CSV files (student data and academic performance metrics).
+ > **Note:** One fact table in PowerBI is the Students table from the SSMS database while the other is a SQL query that takes the averages of all of the columns that were in the Academic Performance table in SSMS.
+
+Used a STAR schema and established relationships between the SQL query tables and the fact tables.
 <p align="center">   
 <img src="https://github.com/user-attachments/assets/21b9c917-ae76-45b7-a740-93323e65f981" alt="model" width="600" />
 </p> 
 
-### 3. **Building the different visuals** 
+### 3. **Building the Different Visuals and Adding Pages** 
 
-
-### 4. **Added more pages** 
-
-
+   - Decided to have the main page of the dashboard be more of an overview while having an additional attendance rate and GPA page that would have additional data. 
+   - Created cards, bar charts, tables, and matrices from the SQL queries.
+   - Altered the color palette and segmented the visuals using boxes.
+   - Applied conditional formatting to improve visual clarity on some visuals. 
+   - Created slicers for selecting between majors and for selecting between student performance on the additional GPA page.
+   - Created buttons to navigate between the different pages. When on the overview page, clicking on the arrows on the average attendance rate and average GPA by major bar charts swap to the additional metrics pages respectivly. When on the additional pages, you can go back to the overview page by clicking on the back button on the top bar.
+   - Added buttons to clear all slicers.
+  
 
 
 # Findings
