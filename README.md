@@ -265,9 +265,38 @@ Used a STAR schema and established relationships between the SQL query tables an
 
 # Findings
 
+## GPA 
+
+- **Business** has the highest average GPA at **3.25**.
+- **Engineering** has the lowest average GPA at **2.88**, while **Science** follows closely with an average GPA of **2.96**. This difference is likely due to the challenging nature of these majors, leading to lower average GPAs for students in these fields.
+- **Across all majors**, GPA distribution follows a bell curve, with students in higher GPA ranges reporting higher study hours per week and better attendance rates.
+- **Gender** and **financial aid status** do not significantly affect average GPA across all majors.
+- **Top-performing Engineering students** (those with a GPA of 3.5+) report the highest average study hours per week, ranging from **27-30 hours**.
+
+
+## Attendance Rate 
+
+- **Engineering** students have the highest average attendance rate at **74.1%**.
+- **Science** students have the lowest average attendance rate at **70.9%**.
+- **Arts**, **Education**, and **Science** majors tend to have a higher average attendance rate for students who receive **financial aid** (**1%-3%** higher).
+- **Education** and **Engineering** majors show higher attendance rates among students who **do not receive financial aid** (**1%** higher).
+
+- Students who live **on-campus** have the highest average attendance rate at **76.5%**, compared to those who **commute** (**71.5%**) or live **off-campus** (**69.9%**).
+- **Students without a part-time job** tend to have a higher average attendance rate (**75.1%**) and a higher average GPA (**3.23**) compared to those with a **part-time job** whose attendance rate is **70.5%** and average GPA is **2.97**.
+- Students who **do not participate in extracurricular activities** have a slightly higher average attendance rate (**73.3%**) compared to those who do (**71.9%**).
+- There is a **slight gender difference** in attendance rates. **Males** generally have a **1%-3%** lower attendance rate across most majors compared to females, except in **Education**, where males have a **2.4% higher** attendance rate.
+
+
+
+## Other
+
+**Science** majors make up **16%** of the student population, which is notably lower compared to other majors, which range from **19.4% to 22.8%**.
+
+
+
 
 
 # Recommendations
-
+- look into science major (lowest avg attendance rate, second lowest avg gpa, lowest amount of study hours per week, lowest number of students)
 
 
