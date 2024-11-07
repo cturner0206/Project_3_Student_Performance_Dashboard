@@ -170,7 +170,7 @@ GROUP BY s.Housing, s.Major
 ORDER BY Major;
 ```
 ```sql
---Average Attendance Rate and Number of Study Hours per Week for Students With Different GPA's
+--Average Attendance Rate and Number of Study Hours per Week for Students With Different GPAs
 WITH GPA_Range AS (
     SELECT ap.StudentID,
            ap.StudyHoursPerWeek,
@@ -200,7 +200,7 @@ GROUP BY Major, GPA_Rating
 ORDER BY Major, GPA_Rating;
 ```
 ```sql
---GPA's of the Top 10 Students per Major
+--GPAs of the Top 10 Students per Major
 WITH RankedStudentsTop AS (
 	SELECT s.StudentID,
            Major,
@@ -217,7 +217,7 @@ FROM RankedStudentstop
 WHERE TopRank <= 10;
 ```
 ```sql
---GPA's of the Bottom 10 Students per Major
+--GPAs of the Bottom 10 Students per Major
 WITH RankedStudentsBottom AS (
 	SELECT s.StudentID,
            Major,
@@ -268,10 +268,10 @@ Used a STAR schema and established relationships between the SQL query tables an
 ## GPA 
 
 - **Business** has the highest average GPA at **3.25**.
-- **Engineering** has the lowest average GPA at **2.88**, while **Science** follows closely with an average GPA of **2.96**. This difference is likely due to the challenging nature of these majors, leading to lower average GPAs for students in these fields.
+- **Engineering** has the lowest average GPA at **2.88**, while **Science** follows closely with an average GPA of **2.96**. This difference is likely due to the challenging nature of these majors, leading to lower average GPAs for students in these fields. 
 - **Across all majors**, GPA distribution follows a bell curve, with students in higher GPA ranges reporting higher study hours per week and better attendance rates.
 - **Gender** and **financial aid status** do not significantly affect average GPA across all majors.
-- **Top-performing Engineering students** (those with a GPA of 3.5+) report the highest average study hours per week, ranging from **27-30 hours**.
+- **Top-performing Engineering students** (those with a GPA of 3.5+) report the highest average study hours per week, ranging from **27-30 hours** out of all majors. 
 
 
 ## Attendance Rate 
@@ -280,23 +280,30 @@ Used a STAR schema and established relationships between the SQL query tables an
 - **Science** students have the lowest average attendance rate at **70.9%**.
 - **Arts**, **Education**, and **Science** majors tend to have a higher average attendance rate for students who receive **financial aid** (**1%-3%** higher).
 - **Education** and **Engineering** majors show higher attendance rates among students who **do not receive financial aid** (**1%** higher).
-
 - Students who live **on-campus** have the highest average attendance rate at **76.5%**, compared to those who **commute** (**71.5%**) or live **off-campus** (**69.9%**).
 - **Students without a part-time job** tend to have a higher average attendance rate (**75.1%**) and a higher average GPA (**3.23**) compared to those with a **part-time job** whose attendance rate is **70.5%** and average GPA is **2.97**.
-- Students who **do not participate in extracurricular activities** have a slightly higher average attendance rate (**73.3%**) compared to those who do (**71.9%**).
+- Students who **do not participate in extracurricular activities** have a slightly higher average attendance rate (**73.3%**) compared to those who do (**71.9%**). However, both have an average GPA of **3.10** across all majors. 
 - There is a **slight gender difference** in attendance rates. **Males** generally have a **1%-3%** lower attendance rate across most majors compared to females, except in **Education**, where males have a **2.4% higher** attendance rate.
-
 
 
 ## Other
 
-**Science** majors make up **16%** of the student population, which is notably lower compared to other majors, which range from **19.4% to 22.8%**.
-
-
+- **Science** majors make up only **16%** of the student population, which is notably lower compared to other majors, which range from **19.4% to 22.8%**.
 
 
 
 # Recommendations
-- look into science major (lowest avg attendance rate, second lowest avg gpa, lowest amount of study hours per week, lowest number of students)
+
+**Focus on Increasing Study Hours, Especially in Challenging Majors (Engineering, Science)**
+- Should encourage students, particularly in challenging majors like Engineering and Science, to increase their weekly study hours as top-performing Engineering students (with a GPA of 3.5+) report the highest study hours, suggesting a positive correlation between study time and GPA.
+  
+**Address the Impact of Part-Time Jobs on GPA and Attendance**
+- Students with part-time jobs tend to have lower attendance rates and GPAs. Offering flexible academic support or altering the workload expectations for these students might alleviate some of the stressors associated with balancing work and school.
+  
+**Increase On-Campus Living**
+- Since students who live on-campus have higher attendance rates and GPAs, the university could encourage more students to live on-campus, provide more on-campus livng arrangements, or offer incentives to improve the attendance rates of off-campus or commuter students.
+  
+**Provide Academic Counseling and Study Skills Resources**
+- Given there are many students in lower GPA ranges who have many study hours, offering additional academic counseling on topics like time management and effective studying techniques could improve GPAs for struggling students. 
 
 
