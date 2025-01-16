@@ -1,6 +1,8 @@
 # Project 3: Student Performance Dashboard 
    
 <img src="https://github.com/user-attachments/assets/5a705fcf-1411-49a3-a444-2afb2e629e95" alt="dash" width="900" />
+<img src="https://github.com/user-attachments/assets/0a4cc4e9-6f19-484c-8f31-1c3afb7a6f2a" alt="dash" width="900" />
+<img src="https://github.com/user-attachments/assets/77fc811b-f2f7-406f-af97-2ec14ea38a15" alt="dash" width="900" />
 
 
 # Table of Contents 
@@ -59,13 +61,13 @@ To be able to create relevant queries that would allow for an end user to gain m
 - Wont be any time series analysis or visuals as there wasn't any time data provied in the dataset. 
 
 ## **Data Cleaning:**  
-  Any data cleaning that took place was in the queries themselves as the data itself was completely clean. The only altering I did was rounding and casting values.
+  The only cleaning involved rounding and casting values in the queries themselves, with nothing done beforehand.
 
 ## **SQL Used:**
    - Group By and Where clauses
    - Aggregate functions: Avg, Sum, Count
    - Joins
-   - Scalar Functions: Round, Cast
+   - Round, Cast
    - Conditional: Case, IIF
    - Subqueries
    - CTE's
