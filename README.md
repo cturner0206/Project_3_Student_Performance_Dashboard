@@ -1,8 +1,8 @@
 # Project 3: Student Performance Dashboard 
    
-<img src="https://github.com/user-attachments/assets/5a705fcf-1411-49a3-a444-2afb2e629e95" alt="dash" width="900" />
+<img src="https://github.com/user-attachments/assets/774314a1-d7d8-4912-be9a-df208c3a8be1" alt="dash" width="900" />
 <img src="https://github.com/user-attachments/assets/0a4cc4e9-6f19-484c-8f31-1c3afb7a6f2a" alt="dash" width="900" />
-<img src="https://github.com/user-attachments/assets/77fc811b-f2f7-406f-af97-2ec14ea38a15" alt="dash" width="900" />
+<img src="https://github.com/user-attachments/assets/f1f08652-3a16-40c2-a4c8-070b5da75b5b" alt="dash" width="900" />
 
 
 # Table of Contents 
